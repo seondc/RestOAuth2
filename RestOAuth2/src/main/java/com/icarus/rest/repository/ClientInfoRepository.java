@@ -10,5 +10,4 @@ import com.icarus.rest.model.ClientInfo;
 @Repository
 @Transactional
 public interface ClientInfoRepository extends CrudRepository<ClientInfo, String>{
-	
 }

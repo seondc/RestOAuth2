@@ -28,4 +28,10 @@ public class AdminController {
 		clientInfo = clientInfoService.addClient(clientInfo);
 		return new ResponseEntity<ClientInfo>(clientInfo, HttpStatus.OK);
 	}
+	
+	@RequestMapping("/get")
+	public ResponseEntity<ClientInfo> add(@RequestParam String clientid) {
+		ClientInfo clientInfo = clientInfoService.getClient(clientid);
+		return new ResponseEntity<ClientInfo>(clientInfo, HttpStatus.OK);
+	}
 }

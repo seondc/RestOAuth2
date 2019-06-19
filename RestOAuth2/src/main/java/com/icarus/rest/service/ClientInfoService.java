@@ -1,5 +1,6 @@
 package com.icarus.rest.service;
 
+import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,5 +18,9 @@ public class ClientInfoService {
 	public ClientInfo addClient(ClientInfo clientInfo) {
 		clientInfo.setClientSecrt(new BCryptPasswordEncoder().encode(clientInfo.getClientSecrt()));
 		return clientInfoRepository.save(clientInfo);
+	}
+	
+	public ClientInfo getClient(String clientId) {
+		return clientInfoRepository.findById(clientId).orElseThrow(() -> new EntityNotFoundException("Not found client["+clientId+"]"));
 	}
 }
