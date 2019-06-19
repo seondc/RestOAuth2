@@ -1,0 +1,18 @@
+logging:
+  level:
+    ROOT: info
+    org:
+      hibernate:
+        type: trace
+        
+spring:
+   datasource:
+      driverClassName: org.mariadb.jdbc.Driver
+      url: jdbc:mariadb://localhost:3306/test
+      username: root
+      password: rh19ehf
+   jpa:
+      hibernate:
+         ddl-auto: none
+      show-sql: true
+      
