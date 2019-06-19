@@ -23,7 +23,6 @@ public class RestOAuth2AuthenticationEntryPoint implements AuthenticationEntryPo
 
 	@Override
 	public void commence(HttpServletRequest request, HttpServletResponse response,	AuthenticationException authException) throws IOException, ServletException {
-		System.out.println(authException.getMessage());
 		Map<String,String> map = new HashMap<String,String>();
 		map.put("code", "401");
 		map.put("message","UNAUTHORIZED");

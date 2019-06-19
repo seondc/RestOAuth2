@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 
 import com.icarus.rest.model.UserInfo;
 
-@Service
+@Service("userDetailsService")
 public class UserDetailsServiceImpl implements UserDetailsService {
 	@Autowired
 	private UserInfoService userInfoService;

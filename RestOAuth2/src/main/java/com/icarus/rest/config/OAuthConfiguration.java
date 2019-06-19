@@ -3,6 +3,7 @@ package com.icarus.rest.config;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -12,6 +13,8 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.A
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
+import org.springframework.security.oauth2.provider.approval.ApprovalStore;
+import org.springframework.security.oauth2.provider.approval.JdbcApprovalStore;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 
@@ -27,6 +30,7 @@ public class OAuthConfiguration extends AuthorizationServerConfigurerAdapter {
 	private AuthenticationManager authenticationManager;
 	
 	@Autowired
+	@Qualifier("userDetailsService")
 	private UserDetailsService userDetailsService;
 	
 	@Autowired
@@ -45,6 +49,7 @@ public class OAuthConfiguration extends AuthorizationServerConfigurerAdapter {
 	@Override
 	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
 		endpoints.tokenStore(tokenStore())
+				 //.approvalStore(approvalStore())
 				 .authenticationManager(authenticationManager)
 				 .userDetailsService(userDetailsService)
 				 .exceptionTranslator(restOAuth2ExceptionTranslator);
@@ -54,4 +59,19 @@ public class OAuthConfiguration extends AuthorizationServerConfigurerAdapter {
 	public TokenStore tokenStore() {
 		return new JdbcTokenStore(dataSource);
 	}
+	
+	@Bean 
+	public ApprovalStore approvalStore() {
+		return new JdbcApprovalStore(dataSource);
+	}
+	/*
+	@Bean
+	@Primary
+	public DefaultTokenServices tokenServices() {
+	    DefaultTokenServices defaultTokenServices = new DefaultTokenServices();
+	    defaultTokenServices.setTokenStore(tokenStore());
+	    defaultTokenServices.setSupportRefreshToken(true);
+	    return defaultTokenServices;
+	}
+	*/
 }

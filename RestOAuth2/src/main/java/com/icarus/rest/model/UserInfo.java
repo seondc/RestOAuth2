@@ -15,17 +15,22 @@ public class UserInfo implements Serializable {
 	private static final long serialVersionUID = 7304223221927852441L;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	//@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="id")
 	private Long id;
+	
 	@Column(name="username",nullable = false)
 	private String username;
+	
 	@Column(name="password",nullable = false)
 	private String password;
+	
 	@Column(name="role",nullable = false)
 	private String role;
+	
 	@Column(name="enabled")
 	private boolean enabled;
+	
 	public Long getId() {
 		return id;
 	}

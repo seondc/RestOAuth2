@@ -19,8 +19,10 @@ public class UserController {
 	@RequestMapping("/add")
 	public ResponseEntity<UserInfo> add(@RequestParam String username, @RequestParam String password) {
 		UserInfo userInfo = new UserInfo();
+		userInfo.setId(1L);
 		userInfo.setUsername(username);
 		userInfo.setPassword(password);
+		userInfo.setRole("ADMIN");
 		userInfo.setEnabled(true);
 		userInfo = userInfoService.addUser(userInfo);
 		return new ResponseEntity<UserInfo>(userInfo, HttpStatus.OK);
