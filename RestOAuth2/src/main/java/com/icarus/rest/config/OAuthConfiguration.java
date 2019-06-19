@@ -15,6 +15,8 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 
+import com.icarus.rest.handler.RestOAuth2ExceptionTranslator;
+
 @Configuration
 @EnableAuthorizationServer
 public class OAuthConfiguration extends AuthorizationServerConfigurerAdapter {
@@ -26,6 +28,9 @@ public class OAuthConfiguration extends AuthorizationServerConfigurerAdapter {
 	
 	@Autowired
 	private UserDetailsService userDetailsService;
+	
+	@Autowired
+	private RestOAuth2ExceptionTranslator restOAuth2ExceptionTranslator;
 	
 	@Override
 	public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
@@ -41,7 +46,8 @@ public class OAuthConfiguration extends AuthorizationServerConfigurerAdapter {
 	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
 		endpoints.tokenStore(tokenStore())
 				 .authenticationManager(authenticationManager)
-				 .userDetailsService(userDetailsService);
+				 .userDetailsService(userDetailsService)
+				 .exceptionTranslator(restOAuth2ExceptionTranslator);
 	}
 	
 	@Bean
