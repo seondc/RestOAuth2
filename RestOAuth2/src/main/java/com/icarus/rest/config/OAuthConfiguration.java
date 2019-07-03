@@ -49,7 +49,7 @@ public class OAuthConfiguration extends AuthorizationServerConfigurerAdapter {
 	@Override
 	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
 		endpoints.tokenStore(tokenStore())
-				 //.approvalStore(approvalStore())
+				 .approvalStore(approvalStore())
 				 .authenticationManager(authenticationManager)
 				 .userDetailsService(userDetailsService)
 				 .exceptionTranslator(restOAuth2ExceptionTranslator);
