@@ -18,6 +18,13 @@ spring:
       hibernate:
          ddl-auto: none
       show-sql: true
+   thymeleaf:
+      check-tmplate-location: true
+      prefix: /WEB-INF/page/
+      suffix: .html
+      mode: HTML5
+      cache: false
+      order: 0
    logging:
      level:
        org.springframework.security: DEBUGG

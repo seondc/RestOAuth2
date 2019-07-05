@@ -28,7 +28,8 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
 	
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
-		http.antMatcher("/**").authorizeRequests().antMatchers("/admin/**").permitAll().anyRequest().authenticated()
+		http.authorizeRequests().antMatchers("/admin/**","/page/**","/resource/**","/favicon.ico").permitAll()
+		.anyRequest().authenticated()
 		.and().exceptionHandling().accessDeniedHandler(restOAut2AccessDniedHandler).authenticationEntryPoint(restOAuth2AuthenticationEntryPoint);
 	}
 }
